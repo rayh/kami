@@ -7,12 +7,22 @@
 //
 
 #import "KAAppDelegate.h"
+#import "KATrackListViewController.h"
+#import <UIColor-Utilities/UIColor+Expanded.h>
 
 @implementation KAAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+
+    KATrackListViewController *trackListController = [[KATrackListViewController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:trackListController];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.tintColor = [UIColor colorWithRGBHex:0xFC3A51];
+    self.window.rootViewController = navController;
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 							

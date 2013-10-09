@@ -13,14 +13,19 @@
 		7165DD011802E13F00AA0220 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7165DCFF1802E13F00AA0220 /* InfoPlist.strings */; };
 		7165DD031802E13F00AA0220 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7165DD021802E13F00AA0220 /* main.m */; };
 		7165DD071802E13F00AA0220 /* KAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7165DD061802E13F00AA0220 /* KAAppDelegate.m */; };
-		7165DD0A1802E13F00AA0220 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7165DD081802E13F00AA0220 /* Main.storyboard */; };
-		7165DD0D1802E13F00AA0220 /* KAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7165DD0C1802E13F00AA0220 /* KAViewController.m */; };
+		7165DD0D1802E13F00AA0220 /* KATrackListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7165DD0C1802E13F00AA0220 /* KATrackListViewController.m */; };
 		7165DD0F1802E13F00AA0220 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7165DD0E1802E13F00AA0220 /* Images.xcassets */; };
 		7165DD161802E13F00AA0220 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7165DD151802E13F00AA0220 /* XCTest.framework */; };
 		7165DD171802E13F00AA0220 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7165DCF61802E13E00AA0220 /* Foundation.framework */; };
 		7165DD181802E13F00AA0220 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7165DCFA1802E13F00AA0220 /* UIKit.framework */; };
 		7165DD201802E13F00AA0220 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7165DD1E1802E13F00AA0220 /* InfoPlist.strings */; };
 		7165DD221802E13F00AA0220 /* KamiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7165DD211802E13F00AA0220 /* KamiTests.m */; };
+		7165DD2D1802E24100AA0220 /* KASoundcloudService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7165DD2C1802E24100AA0220 /* KASoundcloudService.m */; };
+		7165DD2F1802E5D300AA0220 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7165DD2E1802E5D300AA0220 /* AddressBook.framework */; };
+		7165DD311802E5DB00AA0220 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7165DD301802E5DB00AA0220 /* AddressBookUI.framework */; };
+		7165DD341802ED5700AA0220 /* KATrackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7165DD331802ED5700AA0220 /* KATrackCell.m */; };
+		7165DD371802EFC700AA0220 /* UIImage+KAUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 7165DD361802EFC700AA0220 /* UIImage+KAUtilities.m */; };
+		757989E826ED478482734ABE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 222DA26E4E2147ABA2C6162C /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		222DA26E4E2147ABA2C6162C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7165DCF31802E13E00AA0220 /* Kami.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kami.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7165DCF61802E13E00AA0220 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7165DCF81802E13F00AA0220 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -44,15 +50,23 @@
 		7165DD041802E13F00AA0220 /* Kami-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Kami-Prefix.pch"; sourceTree = "<group>"; };
 		7165DD051802E13F00AA0220 /* KAAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KAAppDelegate.h; sourceTree = "<group>"; };
 		7165DD061802E13F00AA0220 /* KAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KAAppDelegate.m; sourceTree = "<group>"; };
-		7165DD091802E13F00AA0220 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		7165DD0B1802E13F00AA0220 /* KAViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KAViewController.h; sourceTree = "<group>"; };
-		7165DD0C1802E13F00AA0220 /* KAViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KAViewController.m; sourceTree = "<group>"; };
+		7165DD0B1802E13F00AA0220 /* KATrackListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KATrackListViewController.h; sourceTree = "<group>"; };
+		7165DD0C1802E13F00AA0220 /* KATrackListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KATrackListViewController.m; sourceTree = "<group>"; };
 		7165DD0E1802E13F00AA0220 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7165DD141802E13F00AA0220 /* KamiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KamiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7165DD151802E13F00AA0220 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		7165DD1D1802E13F00AA0220 /* KamiTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KamiTests-Info.plist"; sourceTree = "<group>"; };
 		7165DD1F1802E13F00AA0220 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7165DD211802E13F00AA0220 /* KamiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KamiTests.m; sourceTree = "<group>"; };
+		7165DD2B1802E24100AA0220 /* KASoundcloudService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KASoundcloudService.h; sourceTree = "<group>"; };
+		7165DD2C1802E24100AA0220 /* KASoundcloudService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KASoundcloudService.m; sourceTree = "<group>"; };
+		7165DD2E1802E5D300AA0220 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		7165DD301802E5DB00AA0220 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		7165DD321802ED5700AA0220 /* KATrackCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KATrackCell.h; sourceTree = "<group>"; };
+		7165DD331802ED5700AA0220 /* KATrackCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KATrackCell.m; sourceTree = "<group>"; };
+		7165DD351802EFC700AA0220 /* UIImage+KAUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+KAUtilities.h"; sourceTree = "<group>"; };
+		7165DD361802EFC700AA0220 /* UIImage+KAUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+KAUtilities.m"; sourceTree = "<group>"; };
+		BD11025F5AC0468AA640BC38 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,9 +74,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7165DD311802E5DB00AA0220 /* AddressBookUI.framework in Frameworks */,
+				7165DD2F1802E5D300AA0220 /* AddressBook.framework in Frameworks */,
 				7165DCF91802E13F00AA0220 /* CoreGraphics.framework in Frameworks */,
 				7165DCFB1802E13F00AA0220 /* UIKit.framework in Frameworks */,
 				7165DCF71802E13E00AA0220 /* Foundation.framework in Frameworks */,
+				757989E826ED478482734ABE /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +103,7 @@
 				7165DD1B1802E13F00AA0220 /* KamiTests */,
 				7165DCF51802E13E00AA0220 /* Frameworks */,
 				7165DCF41802E13E00AA0220 /* Products */,
+				BD11025F5AC0468AA640BC38 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,10 +119,13 @@
 		7165DCF51802E13E00AA0220 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7165DD301802E5DB00AA0220 /* AddressBookUI.framework */,
+				7165DD2E1802E5D300AA0220 /* AddressBook.framework */,
 				7165DCF61802E13E00AA0220 /* Foundation.framework */,
 				7165DCF81802E13F00AA0220 /* CoreGraphics.framework */,
 				7165DCFA1802E13F00AA0220 /* UIKit.framework */,
 				7165DD151802E13F00AA0220 /* XCTest.framework */,
+				222DA26E4E2147ABA2C6162C /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -112,13 +133,19 @@
 		7165DCFC1802E13F00AA0220 /* Kami */ = {
 			isa = PBXGroup;
 			children = (
+				7165DE2518057A8200AA0220 /* Categories */,
 				7165DD051802E13F00AA0220 /* KAAppDelegate.h */,
 				7165DD061802E13F00AA0220 /* KAAppDelegate.m */,
-				7165DD081802E13F00AA0220 /* Main.storyboard */,
-				7165DD0B1802E13F00AA0220 /* KAViewController.h */,
-				7165DD0C1802E13F00AA0220 /* KAViewController.m */,
+				7165DD0B1802E13F00AA0220 /* KATrackListViewController.h */,
+				7165DD0C1802E13F00AA0220 /* KATrackListViewController.m */,
 				7165DD0E1802E13F00AA0220 /* Images.xcassets */,
 				7165DCFD1802E13F00AA0220 /* Supporting Files */,
+				7165DD2B1802E24100AA0220 /* KASoundcloudService.h */,
+				7165DD2C1802E24100AA0220 /* KASoundcloudService.m */,
+				7165DD321802ED5700AA0220 /* KATrackCell.h */,
+				7165DD331802ED5700AA0220 /* KATrackCell.m */,
+				7165DD351802EFC700AA0220 /* UIImage+KAUtilities.h */,
+				7165DD361802EFC700AA0220 /* UIImage+KAUtilities.m */,
 			);
 			path = Kami;
 			sourceTree = "<group>";
@@ -152,6 +179,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		7165DE2518057A8200AA0220 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -159,9 +193,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7165DD251802E13F00AA0220 /* Build configuration list for PBXNativeTarget "Kami" */;
 			buildPhases = (
+				CA79C5B8ACB94C248A783BCC /* Check Pods Manifest.lock */,
 				7165DCEF1802E13E00AA0220 /* Sources */,
 				7165DCF01802E13E00AA0220 /* Frameworks */,
 				7165DCF11802E13E00AA0220 /* Resources */,
+				6EE69155A863480A8A03BDD8 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -200,6 +236,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Wirestorm Pty Ltd";
 				TargetAttributes = {
+					7165DCF21802E13E00AA0220 = {
+						DevelopmentTeam = 42Q2JF4X62;
+					};
 					7165DD131802E13F00AA0220 = {
 						TestTargetID = 7165DCF21802E13E00AA0220;
 					};
@@ -231,7 +270,6 @@
 			files = (
 				7165DD0F1802E13F00AA0220 /* Images.xcassets in Resources */,
 				7165DD011802E13F00AA0220 /* InfoPlist.strings in Resources */,
-				7165DD0A1802E13F00AA0220 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,14 +283,50 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6EE69155A863480A8A03BDD8 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CA79C5B8ACB94C248A783BCC /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7165DCEF1802E13E00AA0220 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7165DD0D1802E13F00AA0220 /* KAViewController.m in Sources */,
+				7165DD0D1802E13F00AA0220 /* KATrackListViewController.m in Sources */,
+				7165DD2D1802E24100AA0220 /* KASoundcloudService.m in Sources */,
 				7165DD071802E13F00AA0220 /* KAAppDelegate.m in Sources */,
 				7165DD031802E13F00AA0220 /* main.m in Sources */,
+				7165DD371802EFC700AA0220 /* UIImage+KAUtilities.m in Sources */,
+				7165DD341802ED5700AA0220 /* KATrackCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,14 +355,6 @@
 				7165DD001802E13F00AA0220 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		7165DD081802E13F00AA0220 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7165DD091802E13F00AA0220 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		7165DD1E1802E13F00AA0220 /* InfoPlist.strings */ = {
@@ -376,9 +442,11 @@
 		};
 		7165DD261802E13F00AA0220 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD11025F5AC0468AA640BC38 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kami/Kami-Prefix.pch";
 				INFOPLIST_FILE = "Kami/Kami-Info.plist";
@@ -389,9 +457,11 @@
 		};
 		7165DD271802E13F00AA0220 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD11025F5AC0468AA640BC38 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kami/Kami-Prefix.pch";
 				INFOPLIST_FILE = "Kami/Kami-Info.plist";
@@ -461,6 +531,7 @@
 				7165DD271802E13F00AA0220 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7165DD281802E13F00AA0220 /* Build configuration list for PBXNativeTarget "KamiTests" */ = {
 			isa = XCConfigurationList;
@@ -469,6 +540,7 @@
 				7165DD2A1802E13F00AA0220 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
