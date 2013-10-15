@@ -2,8 +2,10 @@
 #import "KASoundcloudService.h"
 #import <UIColor-Utilities/UIColor+Expanded.h>
 #import "KATrackCell.h"
+#import "KATrackDetailViewController.h"
+#import "KAListToDetailTransition.h"
 
-@interface KATrackListViewController ()
+@interface KATrackListViewController () <UIViewControllerTransitioningDelegate>
 @property (nonatomic) NSArray *tracks;
 @property (nonatomic) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic) UIRefreshControl *refreshControl;
@@ -18,10 +20,10 @@
     {
         self.title = @"神";
         self.flowLayout = flowLayout;
-        self.flowLayout.itemSize = CGSizeMake(320, 60.);
+        self.flowLayout.itemSize = CGSizeMake(150, 210.);
         self.flowLayout.minimumLineSpacing = 10;
-        self.flowLayout.minimumInteritemSpacing = 10.;
-        self.flowLayout.sectionInset = UIEdgeInsetsMake(10., 0., 10., 0.);
+        self.flowLayout.minimumInteritemSpacing = 8.;
+        self.flowLayout.sectionInset = UIEdgeInsetsMake(10., 6., 10., 6.);
         
         
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Logout"
@@ -107,17 +109,35 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *track = [self.tracks objectAtIndex:indexPath.row];
-    NSString *songId = [track valueForKeyPath:@"origin.id"];
-    NSURL *mobileAppUrl = [NSURL URLWithString:[NSString stringWithFormat:@"soundcloud:track:%@", songId]];
-    NSURL *mobileWebsiteUrl = [NSURL URLWithString:[track valueForKeyPath:@"origin.permalink_url"]];
+    KATrackDetailViewController *detailViewController = [[KATrackDetailViewController alloc] initWithTrack:track];
+    detailViewController.modalPresentationStyle = UIModalPresentationCustom;
+    detailViewController.transitioningDelegate = self;
+//    detailViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:detailViewController animated:YES completion:nil];
     
-    if([[UIApplication sharedApplication] canOpenURL:mobileAppUrl])
-       [[UIApplication sharedApplication] openURL:mobileAppUrl];
-    else
-        [[UIApplication sharedApplication] openURL:mobileWebsiteUrl];
-        
+//    NSString *songId = [track valueForKeyPath:@"origin.id"];
+//    NSURL *mobileAppUrl = [NSURL URLWithString:[NSString stringWithFormat:@"soundcloud:track:%@", songId]];
+//    NSURL *mobileWebsiteUrl = [NSURL URLWithString:[track valueForKeyPath:@"origin.permalink_url"]];
+//    
+//    if([[UIApplication sharedApplication] canOpenURL:mobileAppUrl])
+//       [[UIApplication sharedApplication] openURL:mobileAppUrl];
+//    else
+//        [[UIApplication sharedApplication] openURL:mobileWebsiteUrl];
+    
 }
 
+#pragma mark - UIViewControllerTransitioningDelegate
 
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+                                                                   presentingController:(UIViewController *)presenting
+                                                                       sourceController:(UIViewController *)source
+{
+    return [[KAListToDetailTransition alloc] init];
+}
+
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    return nil;
+}
 
 @end

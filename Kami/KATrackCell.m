@@ -6,7 +6,6 @@
 
 @interface KATrackCell ()
 @property (nonatomic) UIImageView *waveformImageView;
-@property (nonatomic) UIImageView *artworkImageView;
 @property (nonatomic) UILabel *timeLabel;
 @property (nonatomic) UILabel *titleLabel;
 @end
@@ -30,13 +29,13 @@
     self = [super initWithFrame:frame];
     if (self) {
 //        self.contentView.layer.cornerRadius = 4;
-        self.contentView.backgroundColor = [UIColor colorWithRGBHex:0xefefef];
+        self.contentView.backgroundColor = [UIColor colorWithRGBHex:0xc9c9c9];
         self.contentView.layer.masksToBounds = YES;
         
         self.waveformImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
 //        self.waveformImageView.alpha = 0.3;
         self.waveformImageView.contentMode = UIViewContentModeScaleToFill;
-        self.waveformImageView.backgroundColor = [UIColor colorWithRGBHex:0xe0e0e0];
+        self.waveformImageView.backgroundColor = [UIColor colorWithRGBHex:0xc0c0c0];
 //        self.waveformImageView.clipsToBounds = YES;
         [self.contentView addSubview:self.waveformImageView];
         
@@ -46,20 +45,16 @@
 
 
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
+        self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:12];
         self.titleLabel.textColor = [UIColor colorWithRGBHex:0x0E2430];
         self.titleLabel.numberOfLines = 3;
-        self.titleLabel.shadowColor = [UIColor colorWithWhite:1. alpha:0.5];
-        self.titleLabel.shadowOffset = CGSizeMake(0, 1);
         self.titleLabel.textAlignment = NSTextAlignmentLeft;
         [self.contentView addSubview:self.titleLabel];
 
         
         self.timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.timeLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:8];
-        self.timeLabel.textColor = [[UIColor colorWithRGBHex:0x0E2430] colorWithAlphaComponent:0.6];
-        self.timeLabel.shadowColor = [UIColor colorWithWhite:1. alpha:0.5];
-        self.timeLabel.shadowOffset = CGSizeMake(0, 1);
+        self.timeLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:8];
+        self.timeLabel.textColor = [[UIColor colorWithRGBHex:0x0E2430] colorWithAlphaComponent:0.8];
         self.timeLabel.textAlignment = NSTextAlignmentLeft;
         [self.contentView addSubview:self.timeLabel];
     }
@@ -68,24 +63,25 @@
 
 - (void)layoutSubviews
 {
-    self.waveformImageView.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
 
-    self.artworkImageView.frame = CGRectMake(5., 0., self.bounds.size.height, self.bounds.size.height);
-    self.artworkImageView.layer.cornerRadius = self.artworkImageView.frame.size.height/2;
+    self.artworkImageView.frame = CGRectMake(0, 0., self.bounds.size.width, self.bounds.size.width);
+//    self.artworkImageView.layer.cornerRadius = self.artworkImageView.frame.size.height/2;
     self.artworkImageView.layer.masksToBounds = YES;
     
-    self.timeLabel.frame = CGRectMake(self.bounds.size.height+10.,
-                                      2.,
-                                      self.bounds.size.width-self.bounds.size.height-15.,
+    self.waveformImageView.frame = CGRectMake(0, self.bounds.size.width, self.bounds.size.width, self.bounds.size.height);
+    
+    self.timeLabel.frame = CGRectMake(5.,
+                                      CGRectGetMaxY(self.artworkImageView.frame) + 5.,
+                                      self.bounds.size.width-10.,
                                       10);
     
-    CGRect boundingRect = [self.titleLabel.text boundingRectWithSize:CGSizeMake(self.bounds.size.width-self.bounds.size.height-15, CGFLOAT_MAX)
+    CGRect boundingRect = [self.titleLabel.text boundingRectWithSize:CGSizeMake(self.bounds.size.width-10, CGFLOAT_MAX)
                                                              options:NSStringDrawingUsesLineFragmentOrigin
                                                           attributes:@{NSFontAttributeName:self.titleLabel.font}
                                                              context:nil];
-    self.titleLabel.frame = CGRectMake(self.bounds.size.height+10.,
+    self.titleLabel.frame = CGRectMake(5.,
                                        CGRectGetMaxY(self.timeLabel.frame),
-                                       self.bounds.size.width-self.bounds.size.height-15,
+                                       self.bounds.size.width-10.,
                                        ceilf(boundingRect.size.height));
 }
 
