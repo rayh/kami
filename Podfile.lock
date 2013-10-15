@@ -33,7 +33,7 @@ PODS:
   - JSONKit (1.5pre)
   - NSDate+TimeAgo (1.0.2)
   - NXOAuth2Client (1.2.1)
-  - OHAttributedLabel (3.5.0)
+  - OHAttributedLabel (3.5.2)
   - ReactiveCocoa (2.1):
     - ReactiveCocoa/Core
     - ReactiveCocoa/no-arc
@@ -59,7 +59,7 @@ SPEC CHECKSUMS:
   JSONKit: 409734ab3407fce90ef7eaa95d7168f38d9a6601
   NSDate+TimeAgo: fe93d3042e83093ae3630bc47ae7d57f782733f6
   NXOAuth2Client: 478bc4f9a04e7ba9908b6c40f8669321676af0ee
-  OHAttributedLabel: cc550f512bb85add3a16d1d62ba9bba18168a75b
+  OHAttributedLabel: 73cc99cbe32f94d51463853c7ac35a3fba185937
   ReactiveCocoa: b686fa735c28c2dc7311fbd2f0895b4d4ae07360
   UIColor-Utilities: a392783be1b72e5d5ad9ae450ef2280239441bc8
 

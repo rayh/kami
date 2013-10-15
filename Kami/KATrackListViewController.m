@@ -109,7 +109,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *track = [self.tracks objectAtIndex:indexPath.row];
-    KATrackDetailViewController *detailViewController = [[KATrackDetailViewController alloc] initWithTrack:track];
+    KATrackDetailViewController *detailViewController = [[KATrackDetailViewController alloc] initWithTrack:[track valueForKey:@"origin"]];
     detailViewController.modalPresentationStyle = UIModalPresentationCustom;
     detailViewController.transitioningDelegate = self;
 //    detailViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
@@ -132,12 +132,12 @@
                                                                    presentingController:(UIViewController *)presenting
                                                                        sourceController:(UIViewController *)source
 {
-    return [[KAListToDetailTransition alloc] init];
+    return [KAListToDetailTransition forward];
 }
 
 - (id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
 {
-    return nil;
+    return [KAListToDetailTransition reverse];
 }
 
 @end
