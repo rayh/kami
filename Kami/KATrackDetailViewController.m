@@ -57,7 +57,7 @@
     self.scrollView.frame = self.view.bounds;
     self.scrollView.contentSize = self.view.bounds.size;
     
-    self.artworkImageView.frame = CGRectMake(30, 100, 260, 260);
+    self.artworkImageView.frame = CGRectMake(10, 100, 300, 200);
 }
 
 #pragma mark - UIScrollViewDelegate

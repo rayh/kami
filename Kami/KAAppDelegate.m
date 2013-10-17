@@ -19,7 +19,7 @@
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:trackListController];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.tintColor = [UIColor colorWithRGBHex:0xFC3A51];
+    self.window.tintColor = [UIColor colorWithRGBHex:0xFF5200];
     self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
     

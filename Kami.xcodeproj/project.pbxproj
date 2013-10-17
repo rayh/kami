@@ -27,6 +27,7 @@
 		7165DD371802EFC700AA0220 /* UIImage+KAUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 7165DD361802EFC700AA0220 /* UIImage+KAUtilities.m */; };
 		718ECB25180C003600A39B8B /* KATrackDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 718ECB24180C003600A39B8B /* KATrackDetailViewController.m */; };
 		718ECB28180C070C00A39B8B /* KAListToDetailTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 718ECB27180C070C00A39B8B /* KAListToDetailTransition.m */; };
+		71C26B131810027C00FED259 /* UIImageView+KAUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 71C26B121810027C00FED259 /* UIImageView+KAUtilities.m */; };
 		757989E826ED478482734ABE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 222DA26E4E2147ABA2C6162C /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +73,8 @@
 		718ECB24180C003600A39B8B /* KATrackDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KATrackDetailViewController.m; sourceTree = "<group>"; };
 		718ECB26180C070C00A39B8B /* KAListToDetailTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KAListToDetailTransition.h; sourceTree = "<group>"; };
 		718ECB27180C070C00A39B8B /* KAListToDetailTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KAListToDetailTransition.m; sourceTree = "<group>"; };
+		71C26B111810027C00FED259 /* UIImageView+KAUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+KAUtilities.h"; sourceTree = "<group>"; };
+		71C26B121810027C00FED259 /* UIImageView+KAUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+KAUtilities.m"; sourceTree = "<group>"; };
 		BD11025F5AC0468AA640BC38 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -150,8 +153,6 @@
 				7165DD2C1802E24100AA0220 /* KASoundcloudService.m */,
 				7165DD321802ED5700AA0220 /* KATrackCell.h */,
 				7165DD331802ED5700AA0220 /* KATrackCell.m */,
-				7165DD351802EFC700AA0220 /* UIImage+KAUtilities.h */,
-				7165DD361802EFC700AA0220 /* UIImage+KAUtilities.m */,
 				718ECB23180C003600A39B8B /* KATrackDetailViewController.h */,
 				718ECB24180C003600A39B8B /* KATrackDetailViewController.m */,
 				718ECB26180C070C00A39B8B /* KAListToDetailTransition.h */,
@@ -192,6 +193,10 @@
 		7165DE2518057A8200AA0220 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				7165DD351802EFC700AA0220 /* UIImage+KAUtilities.h */,
+				7165DD361802EFC700AA0220 /* UIImage+KAUtilities.m */,
+				71C26B111810027C00FED259 /* UIImageView+KAUtilities.h */,
+				71C26B121810027C00FED259 /* UIImageView+KAUtilities.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -334,6 +339,7 @@
 				7165DD0D1802E13F00AA0220 /* KATrackListViewController.m in Sources */,
 				718ECB25180C003600A39B8B /* KATrackDetailViewController.m in Sources */,
 				7165DD2D1802E24100AA0220 /* KASoundcloudService.m in Sources */,
+				71C26B131810027C00FED259 /* UIImageView+KAUtilities.m in Sources */,
 				7165DD071802E13F00AA0220 /* KAAppDelegate.m in Sources */,
 				7165DD031802E13F00AA0220 /* main.m in Sources */,
 				7165DD371802EFC700AA0220 /* UIImage+KAUtilities.m in Sources */,

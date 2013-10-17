@@ -9,6 +9,7 @@
 @property (nonatomic) NSArray *tracks;
 @property (nonatomic) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic) UIRefreshControl *refreshControl;
+@property (nonatomic) UIActivityIndicatorView *loadingView;
 @end
 
 @implementation KATrackListViewController
@@ -18,12 +19,12 @@
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     if(self = [super initWithCollectionViewLayout:flowLayout])
     {
-        self.title = @"神";
+        self.title = @"Soundcloud Stream";
         self.flowLayout = flowLayout;
-        self.flowLayout.itemSize = CGSizeMake(150, 210.);
+        self.flowLayout.itemSize = CGSizeMake(320, 150.);
         self.flowLayout.minimumLineSpacing = 10;
         self.flowLayout.minimumInteritemSpacing = 8.;
-        self.flowLayout.sectionInset = UIEdgeInsetsMake(10., 6., 10., 6.);
+        self.flowLayout.sectionInset = UIEdgeInsetsMake(10., 0., 10., 0.);
         
         
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Logout"
@@ -37,12 +38,18 @@
 
 - (void)viewDidLoad
 {
-    self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    self.collectionView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
     [self.collectionView registerClass:[KATrackCell class] forCellWithReuseIdentifier:@"KATrackCell"];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(reloadTracks) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:self.refreshControl];
+    
+    self.loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.loadingView startAnimating];
+    [self.view addSubview:self.loadingView];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -61,6 +68,7 @@
         self.tracks = tracks;
         [self.collectionView reloadData];
         [self.refreshControl endRefreshing];
+        [self.loadingView stopAnimating];
     } error:^(NSError *error) {
         NSLog(@"Unable to fetch data: %@", error);
         [[[UIAlertView alloc] initWithTitle:@"Error"
@@ -86,6 +94,11 @@
     [self reloadTracks];
 }
 
+- (void)viewDidLayoutSubviews
+{
+    self.loadingView.center = CGPointMake(self.view.bounds.size.width/2., self.view.bounds.size.height/2.);
+}
+
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -109,21 +122,21 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *track = [self.tracks objectAtIndex:indexPath.row];
-    KATrackDetailViewController *detailViewController = [[KATrackDetailViewController alloc] initWithTrack:[track valueForKey:@"origin"]];
-    detailViewController.modalPresentationStyle = UIModalPresentationCustom;
-    detailViewController.transitioningDelegate = self;
-//    detailViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    [self presentViewController:detailViewController animated:YES completion:nil];
+    NSString *songId = [track valueForKeyPath:@"origin.id"];
+    NSURL *mobileAppUrl = [NSURL URLWithString:[NSString stringWithFormat:@"soundcloud:track:%@", songId]];
+    NSURL *mobileWebsiteUrl = [NSURL URLWithString:[track valueForKeyPath:@"origin.permalink_url"]];
     
-//    NSString *songId = [track valueForKeyPath:@"origin.id"];
-//    NSURL *mobileAppUrl = [NSURL URLWithString:[NSString stringWithFormat:@"soundcloud:track:%@", songId]];
-//    NSURL *mobileWebsiteUrl = [NSURL URLWithString:[track valueForKeyPath:@"origin.permalink_url"]];
-//    
-//    if([[UIApplication sharedApplication] canOpenURL:mobileAppUrl])
-//       [[UIApplication sharedApplication] openURL:mobileAppUrl];
-//    else
-//        [[UIApplication sharedApplication] openURL:mobileWebsiteUrl];
+    if([[UIApplication sharedApplication] canOpenURL:mobileAppUrl])
+       [[UIApplication sharedApplication] openURL:mobileAppUrl];
+    else
+        [[UIApplication sharedApplication] openURL:mobileWebsiteUrl];
     
+    
+// Disabled potential detail view
+//    KATrackDetailViewController *detailViewController = [[KATrackDetailViewController alloc] initWithTrack:nil];
+//    detailViewController.modalPresentationStyle = UIModalPresentationCustom;
+//    detailViewController.transitioningDelegate = self;
+//    [self presentViewController:detailViewController animated:NO completion:nil];
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate
