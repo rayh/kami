@@ -9,11 +9,13 @@
 #import "KAAppDelegate.h"
 #import "KATrackListViewController.h"
 #import <UIColor-Utilities/UIColor+Expanded.h>
+#import <TestFlightSDK/TestFlight.h>
 
 @implementation KAAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [TestFlight takeOff:@"e9191b92-45a2-4cd3-a619-53e76851cf40"];
 
     KATrackListViewController *trackListController = [[KATrackListViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:trackListController];

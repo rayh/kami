@@ -23,14 +23,12 @@ PODS:
     - NXOAuth2Client (= 1.2.1)
   - CocoaSoundCloudUI (1.0.5):
     - CocoaSoundCloudAPI (~> 1.0.1)
-    - JSONKit
     - OHAttributedLabel
   - EnumeratorKit (0.1.1):
     - EnumeratorKit/Core
   - EnumeratorKit/Core (0.1.1):
     - EnumeratorKit/EKFiber
   - EnumeratorKit/EKFiber (0.1.1)
-  - JSONKit (1.5pre)
   - NSDate+TimeAgo (1.0.2)
   - NXOAuth2Client (1.2.1)
   - OHAttributedLabel (3.5.2)
@@ -40,27 +38,33 @@ PODS:
   - ReactiveCocoa/Core (2.1):
     - ReactiveCocoa/no-arc
   - ReactiveCocoa/no-arc (2.1)
+  - TestFlightSDK (2.1.1-beta)
   - UIColor-Utilities (1.0.1)
 
 DEPENDENCIES:
   - AFNetworking
   - CocoaSoundCloudAPI
-  - CocoaSoundCloudUI
+  - CocoaSoundCloudUI (from `https://github.com/rayh/CocoaSoundCloudUI.git`)
   - EnumeratorKit
   - NSDate+TimeAgo
   - ReactiveCocoa
+  - TestFlightSDK
   - UIColor-Utilities
+
+EXTERNAL SOURCES:
+  CocoaSoundCloudUI:
+    :git: https://github.com/rayh/CocoaSoundCloudUI.git
 
 SPEC CHECKSUMS:
   AFNetworking: 3fa983b1beaba69566a3374612511e2a6e3fe845
   CocoaSoundCloudAPI: 71e8ac175772ed161bbff6f46f04b171136a8292
-  CocoaSoundCloudUI: 7c145af797c4e9c4e5da34d211fd689020ecff86
+  CocoaSoundCloudUI: efbe6ab82e0dba700465bcafc4918b80116bff15
   EnumeratorKit: 811a35e8f9a7f043f4a92492af0e1b0f70b5ec48
-  JSONKit: 409734ab3407fce90ef7eaa95d7168f38d9a6601
   NSDate+TimeAgo: fe93d3042e83093ae3630bc47ae7d57f782733f6
   NXOAuth2Client: 478bc4f9a04e7ba9908b6c40f8669321676af0ee
   OHAttributedLabel: 73cc99cbe32f94d51463853c7ac35a3fba185937
   ReactiveCocoa: b686fa735c28c2dc7311fbd2f0895b4d4ae07360
+  TestFlightSDK: dea28c16f0bf65c49c4ed8939b2ae0b0ed9bf8b0
   UIColor-Utilities: a392783be1b72e5d5ad9ae450ef2280239441bc8
 
-COCOAPODS: 0.25.0
+COCOAPODS: 0.26.2
