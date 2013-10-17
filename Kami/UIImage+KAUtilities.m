@@ -13,23 +13,29 @@
     return result;
 }
 
-- (UIImage*)rotateAboutPoint
+- (UIImage *)applyArtworkImageEffects
 {
-//    CIContext *context = [CIContext contextWithOptions:nil];
     CIImage *beginImage = [CIImage imageWithCGImage:self.CGImage];
     
-    NSLog(@"Effects in %@", [CIFilter filterNamesInCategory:kCICategoryDistortionEffect]);
+    CIFilter *filter = [CIFilter filterWithName:@"CIBloom"];
+    [filter setValue:beginImage forKey:kCIInputImageKey];
+    [filter setValue:@(1.) forKey:kCIInputRadiusKey];
+    [filter setValue:@(1) forKey:kCIInputIntensityKey];
+    
+    CIImage *outputImage = [filter outputImage];
+    UIImage *finalImage = [UIImage imageWithCIImage:outputImage];
+    return finalImage;
+}
+
+- (UIImage*)rotateAboutPoint
+{
+    CIImage *beginImage = [CIImage imageWithCGImage:self.CGImage];
     
     CIFilter *filter = [CIFilter filterWithName:@"CICircularWrap"];
     [filter setValue:beginImage forKey:kCIInputImageKey];
-//    [filter setValue:[CIVector vectorWithX:self.size.width/2. Y:-self.size.height] forKey:kCIInputCenterKey];
-//    [filter setValue:@(self.size.width/(M_PI)) forKey:kCIInputRadiusKey];
-//    [filter setValue:@(M_PI*2) forKey:kCIInputAngleKey];
     
     CIImage *outputImage = [filter outputImage];
-//    CGImageRef cgImgRef = [context createCGImage:outputImage fromRect:[outputImage extent]];
     UIImage *finalImage = [UIImage imageWithCIImage:outputImage];
-//    CGImageRelease(cgImgRef);
     return finalImage;
 }
 

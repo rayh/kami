@@ -2,5 +2,6 @@
 
 @interface UIImage (KAUtilities)
 - (UIImage *)cropToTopHalf;
+- (UIImage *)applyArtworkImageEffects;
 - (UIImage *)rotateAboutPoint;
 @end

@@ -2,11 +2,14 @@
 #import "KASoundcloudService.h"
 #import <UIColor-Utilities/UIColor+Expanded.h>
 #import "KATrackCell.h"
+#import "KATrackDetailViewController.h"
+#import "KAListToDetailTransition.h"
 
-@interface KATrackListViewController ()
+@interface KATrackListViewController () <UIViewControllerTransitioningDelegate>
 @property (nonatomic) NSArray *tracks;
 @property (nonatomic) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic) UIRefreshControl *refreshControl;
+@property (nonatomic) UIActivityIndicatorView *loadingView;
 @end
 
 @implementation KATrackListViewController
@@ -16,11 +19,11 @@
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     if(self = [super initWithCollectionViewLayout:flowLayout])
     {
-        self.title = @"神";
+        self.title = @"Soundcloud Stream";
         self.flowLayout = flowLayout;
-        self.flowLayout.itemSize = CGSizeMake(320, 60.);
+        self.flowLayout.itemSize = CGSizeMake(320, 150.);
         self.flowLayout.minimumLineSpacing = 10;
-        self.flowLayout.minimumInteritemSpacing = 10.;
+        self.flowLayout.minimumInteritemSpacing = 8.;
         self.flowLayout.sectionInset = UIEdgeInsetsMake(10., 0., 10., 0.);
         
         
@@ -35,12 +38,18 @@
 
 - (void)viewDidLoad
 {
-    self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    self.collectionView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
     [self.collectionView registerClass:[KATrackCell class] forCellWithReuseIdentifier:@"KATrackCell"];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(reloadTracks) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:self.refreshControl];
+    
+    self.loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.loadingView startAnimating];
+    [self.view addSubview:self.loadingView];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -59,6 +68,7 @@
         self.tracks = tracks;
         [self.collectionView reloadData];
         [self.refreshControl endRefreshing];
+        [self.loadingView stopAnimating];
     } error:^(NSError *error) {
         NSLog(@"Unable to fetch data: %@", error);
         [[[UIAlertView alloc] initWithTitle:@"Error"
@@ -82,6 +92,11 @@
     
     // Force re-autentication
     [self reloadTracks];
+}
+
+- (void)viewDidLayoutSubviews
+{
+    self.loadingView.center = CGPointMake(self.view.bounds.size.width/2., self.view.bounds.size.height/2.);
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -115,9 +130,27 @@
        [[UIApplication sharedApplication] openURL:mobileAppUrl];
     else
         [[UIApplication sharedApplication] openURL:mobileWebsiteUrl];
-        
+    
+    
+// Disabled potential detail view
+//    KATrackDetailViewController *detailViewController = [[KATrackDetailViewController alloc] initWithTrack:nil];
+//    detailViewController.modalPresentationStyle = UIModalPresentationCustom;
+//    detailViewController.transitioningDelegate = self;
+//    [self presentViewController:detailViewController animated:NO completion:nil];
 }
 
+#pragma mark - UIViewControllerTransitioningDelegate
 
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+                                                                   presentingController:(UIViewController *)presenting
+                                                                       sourceController:(UIViewController *)source
+{
+    return [KAListToDetailTransition forward];
+}
+
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    return [KAListToDetailTransition reverse];
+}
 
 @end

@@ -1,13 +1,6 @@
-//
-//  KATrackCell.h
-//  Kami
-//
-//  Created by Ray Hilton on 8/10/2013.
-//  Copyright (c) 2013 Wirestorm Pty Ltd. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 
 @interface KATrackCell : UICollectionViewCell
+@property (nonatomic) UIImageView *artworkImageView;
 - (void)configureWithTrack:(NSDictionary*)track;
 @end

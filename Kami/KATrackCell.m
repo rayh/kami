@@ -3,12 +3,14 @@
 #import <UIColor-Utilities/UIColor+Expanded.h>
 #import "UIImage+KAUtilities.h"
 #import <NSDate+TimeAgo/NSDate+TimeAgo.h>
+#import "UIImageView+KAUtilities.h"
 
 @interface KATrackCell ()
 @property (nonatomic) UIImageView *waveformImageView;
-@property (nonatomic) UIImageView *artworkImageView;
+@property (nonatomic) UIImageView *authorImageView;
 @property (nonatomic) UILabel *timeLabel;
 @property (nonatomic) UILabel *titleLabel;
+@property (nonatomic) UIView *topBorderView;
 @end
 
 @implementation KATrackCell
@@ -29,37 +31,43 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-//        self.contentView.layer.cornerRadius = 4;
-        self.contentView.backgroundColor = [UIColor colorWithRGBHex:0xefefef];
-        self.contentView.layer.masksToBounds = YES;
-        
-        self.waveformImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-//        self.waveformImageView.alpha = 0.3;
-        self.waveformImageView.contentMode = UIViewContentModeScaleToFill;
-        self.waveformImageView.backgroundColor = [UIColor colorWithRGBHex:0xe0e0e0];
-//        self.waveformImageView.clipsToBounds = YES;
-        [self.contentView addSubview:self.waveformImageView];
+//        self.contentView.layer.cornerRadius = 3;
+//        self.contentView.layer.borderWidth = 1;
+//        self.contentView.layer.borderColor = [UIColor colorWithWhite:0 alpha:0.5].CGColor;
+//        self.contentView.layer.masksToBounds = YES;
         
         self.artworkImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         self.artworkImageView.contentMode = UIViewContentModeScaleAspectFill;
         [self.contentView addSubview:self.artworkImageView];
-
+        
+        self.waveformImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+        self.waveformImageView.alpha = 0.8;
+        self.waveformImageView.contentMode = UIViewContentModeScaleToFill;
+        self.waveformImageView.tintColor = [UIColor blackColor];
+        self.waveformImageView.backgroundColor = [UIColor colorWithWhite:0.2 alpha:1.];
+        [self.contentView addSubview:self.waveformImageView];
+        
+        self.topBorderView = [[UIView alloc] initWithFrame:CGRectZero];
+        self.topBorderView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
+        [self.contentView addSubview:self.topBorderView];
+        
+        self.authorImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+        self.authorImageView.layer.borderColor = [UIColor colorWithWhite:1 alpha:0.5].CGColor;
+        self.authorImageView.layer.borderWidth = 1.;
+        self.authorImageView.layer.cornerRadius = 17.;
+        self.authorImageView.layer.masksToBounds = YES;
+        [self.contentView addSubview:self.authorImageView];
 
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
-        self.titleLabel.textColor = [UIColor colorWithRGBHex:0x0E2430];
+        self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:13];
+        self.titleLabel.textColor = [UIColor whiteColor];
         self.titleLabel.numberOfLines = 3;
-        self.titleLabel.shadowColor = [UIColor colorWithWhite:1. alpha:0.5];
-        self.titleLabel.shadowOffset = CGSizeMake(0, 1);
         self.titleLabel.textAlignment = NSTextAlignmentLeft;
         [self.contentView addSubview:self.titleLabel];
-
         
         self.timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.timeLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:8];
-        self.timeLabel.textColor = [[UIColor colorWithRGBHex:0x0E2430] colorWithAlphaComponent:0.6];
-        self.timeLabel.shadowColor = [UIColor colorWithWhite:1. alpha:0.5];
-        self.timeLabel.shadowOffset = CGSizeMake(0, 1);
+        self.timeLabel.textColor = [UIColor colorWithWhite:1 alpha:0.7];
         self.timeLabel.textAlignment = NSTextAlignmentLeft;
         [self.contentView addSubview:self.timeLabel];
     }
@@ -68,46 +76,52 @@
 
 - (void)layoutSubviews
 {
-    self.waveformImageView.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
+    self.topBorderView.frame = CGRectMake(0, 0, self.bounds.size.width, 1);
 
-    self.artworkImageView.frame = CGRectMake(5., 0., self.bounds.size.height, self.bounds.size.height);
-    self.artworkImageView.layer.cornerRadius = self.artworkImageView.frame.size.height/2;
+    self.artworkImageView.frame = self.bounds;
+//    self.artworkImageView.layer.cornerRadius = self.artworkImageView.frame.size.height/2;
     self.artworkImageView.layer.masksToBounds = YES;
     
-    self.timeLabel.frame = CGRectMake(self.bounds.size.height+10.,
-                                      2.,
-                                      self.bounds.size.width-self.bounds.size.height-15.,
+    self.waveformImageView.frame = CGRectMake(0, self.bounds.size.height - 60., self.bounds.size.width, 60.);
+    
+    self.authorImageView.frame = CGRectMake(5.,self.bounds.size.height - 55., 34., 34.);
+    
+    self.timeLabel.frame = CGRectMake(44.,
+                                      self.bounds.size.height - 55.,
+                                      self.bounds.size.width - 10.,
                                       10);
     
-    CGRect boundingRect = [self.titleLabel.text boundingRectWithSize:CGSizeMake(self.bounds.size.width-self.bounds.size.height-15, CGFLOAT_MAX)
+    CGRect boundingRect = [self.titleLabel.text boundingRectWithSize:CGSizeMake(self.bounds.size.width-5.-44., CGFLOAT_MAX)
                                                              options:NSStringDrawingUsesLineFragmentOrigin
                                                           attributes:@{NSFontAttributeName:self.titleLabel.font}
                                                              context:nil];
-    self.titleLabel.frame = CGRectMake(self.bounds.size.height+10.,
+    self.titleLabel.frame = CGRectMake(44.,
                                        CGRectGetMaxY(self.timeLabel.frame),
-                                       self.bounds.size.width-self.bounds.size.height-15,
+                                       self.bounds.size.width-5.-44.,
                                        ceilf(boundingRect.size.height));
 }
 
 - (void)configureWithTrack:(NSDictionary*)activityItem
 {
     NSDate *date = [[KATrackCell parsingDateFormatter] dateFromString:[activityItem valueForKey:@"created_at"]];
-    self.timeLabel.text = [NSString stringWithFormat:@"%@ by %@", [date timeAgo], [activityItem valueForKeyPath:@"origin.user.username"]];
+    self.timeLabel.text = [[NSString stringWithFormat:@"%@ by %@", [date timeAgo], [activityItem valueForKeyPath:@"origin.user.username"]] uppercaseString];
     self.titleLabel.text = [activityItem valueForKeyPath:@"origin.title"];
     [self setNeedsLayout];
     
     // Load waveform
-    UIImageView *imageView = self.waveformImageView;
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:[activityItem valueForKeyPath:@"origin.waveform_url"]]];
-    [self.waveformImageView setImageWithURLRequest:request
-                                  placeholderImage:nil
-                                           success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                               imageView.image = [[image cropToTopHalf] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-                                           } failure:nil];
+    [self.waveformImageView setImageWithURLString:[activityItem valueForKeyPath:@"origin.waveform_url"] mutate:^UIImage *(UIImage *image) {
+        return [[image cropToTopHalf] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    }];
     
     // Load artwork
-    [self.artworkImageView setImageWithURL:[NSURL URLWithString:[activityItem valueForKeyPath:@"origin.artwork_url"]]
-                          placeholderImage:nil];
+    [self.artworkImageView setImageWithURLString:[activityItem valueForKeyPath:@"origin.artwork_url"] mutate:^UIImage *(UIImage *image) {
+        return image;
+    }];
+    
+    // Load avatar
+    [self.authorImageView setImageWithURLString:[activityItem valueForKeyPath:@"origin.user.avatar_url"] mutate:^UIImage *(UIImage *image) {
+        return image;
+    }];
 }
 
 
