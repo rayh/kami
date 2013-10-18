@@ -21,7 +21,7 @@ PODS:
     - AFNetworking/NSURLConnection
   - CocoaSoundCloudAPI (1.0.1):
     - NXOAuth2Client (= 1.2.1)
-  - CocoaSoundCloudUI (1.0.5):
+  - CocoaSoundCloudUI (1.0.8):
     - CocoaSoundCloudAPI (~> 1.0.1)
     - OHAttributedLabel
   - EnumeratorKit (0.1.1):
@@ -58,7 +58,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: 3fa983b1beaba69566a3374612511e2a6e3fe845
   CocoaSoundCloudAPI: 71e8ac175772ed161bbff6f46f04b171136a8292
-  CocoaSoundCloudUI: efbe6ab82e0dba700465bcafc4918b80116bff15
+  CocoaSoundCloudUI: 47c6fefd6f96af2e07af6dab73db6d9af70177f7
   EnumeratorKit: 811a35e8f9a7f043f4a92492af0e1b0f70b5ec48
   NSDate+TimeAgo: fe93d3042e83093ae3630bc47ae7d57f782733f6
   NXOAuth2Client: 478bc4f9a04e7ba9908b6c40f8669321676af0ee

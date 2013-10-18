@@ -11,6 +11,7 @@
 @property (nonatomic) UILabel *timeLabel;
 @property (nonatomic) UILabel *titleLabel;
 @property (nonatomic) UIView *topBorderView;
+@property (nonatomic) UIToolbar *waveformBackgroundView;
 @end
 
 @implementation KATrackCell
@@ -40,11 +41,15 @@
         self.artworkImageView.contentMode = UIViewContentModeScaleAspectFill;
         [self.contentView addSubview:self.artworkImageView];
         
+        self.waveformBackgroundView = [[UIToolbar alloc] initWithFrame:CGRectZero];
+        self.waveformBackgroundView.barStyle = UIBarStyleBlack;
+        [self.contentView addSubview:self.waveformBackgroundView];
+        
         self.waveformImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        self.waveformImageView.alpha = 0.8;
+        self.waveformImageView.alpha = 1.0;
         self.waveformImageView.contentMode = UIViewContentModeScaleToFill;
-        self.waveformImageView.tintColor = [UIColor blackColor];
-        self.waveformImageView.backgroundColor = [UIColor colorWithWhite:0.2 alpha:1.];
+        self.waveformImageView.tintColor = [UIColor colorWithWhite:1. alpha:0.1];
+//        self.waveformImageView.backgroundColor = [UIColor colorWithWhite:0.2 alpha:1.];
         [self.contentView addSubview:self.waveformImageView];
         
         self.topBorderView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -59,14 +64,14 @@
         [self.contentView addSubview:self.authorImageView];
 
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:13];
+        self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:17];
         self.titleLabel.textColor = [UIColor whiteColor];
-        self.titleLabel.numberOfLines = 3;
+        self.titleLabel.numberOfLines = 0;
         self.titleLabel.textAlignment = NSTextAlignmentLeft;
         [self.contentView addSubview:self.titleLabel];
         
         self.timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.timeLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:8];
+        self.timeLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:10];
         self.timeLabel.textColor = [UIColor colorWithWhite:1 alpha:0.7];
         self.timeLabel.textAlignment = NSTextAlignmentLeft;
         [self.contentView addSubview:self.timeLabel];
@@ -76,20 +81,23 @@
 
 - (void)layoutSubviews
 {
+    CGFloat overlayHeight = ceilf(self.bounds.size.height/3.);
+    
     self.topBorderView.frame = CGRectMake(0, 0, self.bounds.size.width, 1);
 
     self.artworkImageView.frame = self.bounds;
 //    self.artworkImageView.layer.cornerRadius = self.artworkImageView.frame.size.height/2;
     self.artworkImageView.layer.masksToBounds = YES;
     
-    self.waveformImageView.frame = CGRectMake(0, self.bounds.size.height - 60., self.bounds.size.width, 60.);
+    self.waveformImageView.frame = CGRectMake(0, self.bounds.size.height - overlayHeight, self.bounds.size.width, overlayHeight);
+    self.waveformBackgroundView.frame = self.waveformImageView.frame;
     
-    self.authorImageView.frame = CGRectMake(5.,self.bounds.size.height - 55., 34., 34.);
+    self.authorImageView.frame = CGRectMake(5.,self.bounds.size.height - overlayHeight + 5., 34., 34.);
     
     self.timeLabel.frame = CGRectMake(44.,
-                                      self.bounds.size.height - 55.,
+                                      self.bounds.size.height - overlayHeight + 5.,
                                       self.bounds.size.width - 10.,
-                                      10);
+                                      12);
     
     CGRect boundingRect = [self.titleLabel.text boundingRectWithSize:CGSizeMake(self.bounds.size.width-5.-44., CGFLOAT_MAX)
                                                              options:NSStringDrawingUsesLineFragmentOrigin
@@ -104,22 +112,22 @@
 - (void)configureWithTrack:(NSDictionary*)activityItem
 {
     NSDate *date = [[KATrackCell parsingDateFormatter] dateFromString:[activityItem valueForKey:@"created_at"]];
-    self.timeLabel.text = [[NSString stringWithFormat:@"%@ by %@", [date timeAgo], [activityItem valueForKeyPath:@"origin.user.username"]] uppercaseString];
-    self.titleLabel.text = [activityItem valueForKeyPath:@"origin.title"];
+    self.timeLabel.text = [[NSString stringWithFormat:@"%@ by %@", [date timeAgo], [activityItem valueForKeyPath:@"user.username"]] uppercaseString];
+    self.titleLabel.text = [activityItem valueForKeyPath:@"title"];
     [self setNeedsLayout];
     
     // Load waveform
-    [self.waveformImageView setImageWithURLString:[activityItem valueForKeyPath:@"origin.waveform_url"] mutate:^UIImage *(UIImage *image) {
+    [self.waveformImageView setImageWithURLString:[activityItem valueForKeyPath:@"waveform_url"] mutate:^UIImage *(UIImage *image) {
         return [[image cropToTopHalf] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     }];
     
     // Load artwork
-    [self.artworkImageView setImageWithURLString:[activityItem valueForKeyPath:@"origin.artwork_url"] mutate:^UIImage *(UIImage *image) {
+    [self.artworkImageView setImageWithURLString:[activityItem valueForKeyPath:@"artwork_url"] mutate:^UIImage *(UIImage *image) {
         return image;
     }];
     
     // Load avatar
-    [self.authorImageView setImageWithURLString:[activityItem valueForKeyPath:@"origin.user.avatar_url"] mutate:^UIImage *(UIImage *image) {
+    [self.authorImageView setImageWithURLString:[activityItem valueForKeyPath:@"user.avatar_url"] mutate:^UIImage *(UIImage *image) {
         return image;
     }];
 }

@@ -19,13 +19,12 @@
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     if(self = [super initWithCollectionViewLayout:flowLayout])
     {
-        self.title = @"Soundcloud Stream";
+        self.title = @"Mixmaster";
         self.flowLayout = flowLayout;
-        self.flowLayout.itemSize = CGSizeMake(320, 150.);
-        self.flowLayout.minimumLineSpacing = 10;
+        self.flowLayout.minimumLineSpacing = 0;
         self.flowLayout.minimumInteritemSpacing = 8.;
-        self.flowLayout.sectionInset = UIEdgeInsetsMake(10., 0., 10., 0.);
-        
+        self.flowLayout.sectionInset = UIEdgeInsetsZero;
+        self.flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Logout"
                                                                                  style:UIBarButtonItemStylePlain
@@ -40,6 +39,7 @@
 {
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     self.collectionView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
+    self.collectionView.pagingEnabled = YES;
     [self.collectionView registerClass:[KATrackCell class] forCellWithReuseIdentifier:@"KATrackCell"];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -122,9 +122,9 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *track = [self.tracks objectAtIndex:indexPath.row];
-    NSString *songId = [track valueForKeyPath:@"origin.id"];
+    NSString *songId = [track valueForKeyPath:@"id"];
     NSURL *mobileAppUrl = [NSURL URLWithString:[NSString stringWithFormat:@"soundcloud:track:%@", songId]];
-    NSURL *mobileWebsiteUrl = [NSURL URLWithString:[track valueForKeyPath:@"origin.permalink_url"]];
+    NSURL *mobileWebsiteUrl = [NSURL URLWithString:[track valueForKeyPath:@"permalink_url"]];
     
     if([[UIApplication sharedApplication] canOpenURL:mobileAppUrl])
        [[UIApplication sharedApplication] openURL:mobileAppUrl];
@@ -137,6 +137,21 @@
 //    detailViewController.modalPresentationStyle = UIModalPresentationCustom;
 //    detailViewController.transitioningDelegate = self;
 //    [self presentViewController:detailViewController animated:NO completion:nil];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [collectionView performBatchUpdates:^{
+        [self.collectionView.collectionViewLayout invalidateLayout];
+    } completion:^(BOOL finished) {
+        [collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
+    }];
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath;
+{
+    return self.view.bounds.size;
+//    return CGSizeMake(320, self.view.bounds.size.height);
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate

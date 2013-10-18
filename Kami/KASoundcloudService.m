@@ -93,10 +93,10 @@
     return [[self authenticate] flattenMap:^RACStream *(SCAccount *account) {
         return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
 
-            NSString *resourceURL = @"https://api.soundcloud.com/me/activities.json";
+            NSString *resourceURL = @"https://api.soundcloud.com/tracks.json";
             [SCRequest performMethod:SCRequestMethodGET
                           onResource:[NSURL URLWithString:resourceURL]
-                     usingParameters:nil //@{@"q":@"psy trance", @"duration[from]":[@(MIN_DURATION) stringValue]}
+                     usingParameters:@{@"bpm[from]":@"120", @"duration[from]":[@(MIN_DURATION) stringValue], @"filters":@"streamable"}
                          withAccount:account
               sendingProgressHandler:nil
                      responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error) {
@@ -112,7 +112,7 @@
                                  return;
                              }
                              
-                             if(![activities isKindOfClass:[NSDictionary class]])
+                             if(![activities isKindOfClass:[NSArray class]])
                              {
                                  [subscriber sendError:[NSError errorWithDomain:ERROR_DOMAIN
                                                                            code:KAErrorCodeInvalidJson
@@ -121,8 +121,8 @@
                              }
                          
                          
-                             [subscriber sendNext:[[activities valueForKey:@"collection"] filter:^BOOL(NSDictionary *obj) {
-                                 return [obj valueForKeyPath:@"origin.artwork_url"] != [NSNull null] && [[obj valueForKey:@"type"] isEqualToString:@"track"];
+                             [subscriber sendNext:[activities filter:^BOOL(NSDictionary *obj) {
+                                 return [obj valueForKeyPath:@"artwork_url"] != [NSNull null];
                              }]];
                          
                          }

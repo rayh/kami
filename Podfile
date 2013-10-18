@@ -8,4 +8,3 @@ pod 'UIColor-Utilities'
 pod 'EnumeratorKit'
 pod 'NSDate+TimeAgo'
 pod 'TestFlightSDK'
-#pod "WSFoundation", {:git => "git@github.com:rayh/ws-foundation.git" }
