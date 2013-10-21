@@ -42,7 +42,7 @@
         self.waveformImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         self.waveformImageView.alpha = 1.0;
         self.waveformImageView.contentMode = UIViewContentModeScaleToFill;
-        self.waveformImageView.tintColor = [[UIColor colorWithRGBHex:0xf0570c] colorWithAlphaComponent:0.];
+        self.waveformImageView.tintColor = [[UIColor colorWithRGBHex:0xf0570c] colorWithAlphaComponent:0.8];
 //        self.waveformImageView.backgroundColor = [UIColor colorWithWhite:0.2 alpha:1.];
         [self.contentView addSubview:self.waveformImageView];
         

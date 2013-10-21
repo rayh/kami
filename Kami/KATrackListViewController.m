@@ -74,7 +74,7 @@
     [self.collectionView.backgroundView addSubview:self.overlayView];
 
     self.navigationBarBackgroundView = [[UIView alloc] initWithFrame:CGRectZero];
-    self.navigationBarBackgroundView.backgroundColor = [[UIColor colorWithRGBHex:0xf0570c] colorWithAlphaComponent:0.7];
+    self.navigationBarBackgroundView.backgroundColor = [[UIColor colorWithRGBHex:0xf0570c] colorWithAlphaComponent:0.8];
     [self.collectionView.backgroundView addSubview:self.navigationBarBackgroundView];
     
     UIInterpolatingMotionEffect *horizontalShift = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
@@ -161,7 +161,6 @@
     CGFloat proportion = [self proportionOfScreenTakenUpByCell:cell];
     self.backgroundImageView.image = self.centreCell.artworkImageView.image;
     self.backgroundImageView.alpha = (proportion-0.5)*2;
-    NSLog(@"cell %@ is ar %0.2f", cell, proportion);
 }
 
 - (CGFloat)proportionOfScreenTakenUpByCell:(KATrackCell *)cell
@@ -204,7 +203,7 @@
 {
     NSDictionary *track = [self.tracks objectAtIndex:indexPath.row];
     NSString *songId = [track valueForKeyPath:@"id"];
-    NSURL *mobileAppUrl = [NSURL URLWithString:[NSString stringWithFormat:@"soundcloud:track:%@", songId]];
+    NSURL *mobileAppUrl = [NSURL URLWithString:[NSString stringWithFormat:@"soundcloud:sounds:%@", songId]];
     NSURL *mobileWebsiteUrl = [NSURL URLWithString:[track valueForKeyPath:@"permalink_url"]];
     
     if([[UIApplication sharedApplication] canOpenURL:mobileAppUrl])
