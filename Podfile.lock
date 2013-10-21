@@ -38,6 +38,7 @@ PODS:
   - ReactiveCocoa/Core (2.1):
     - ReactiveCocoa/no-arc
   - ReactiveCocoa/no-arc (2.1)
+  - Reveal-iOS-SDK (1.0.0)
   - TestFlightSDK (2.1.1-beta)
   - UIColor-Utilities (1.0.1)
 
@@ -48,6 +49,7 @@ DEPENDENCIES:
   - EnumeratorKit
   - NSDate+TimeAgo
   - ReactiveCocoa
+  - Reveal-iOS-SDK
   - TestFlightSDK
   - UIColor-Utilities
 
@@ -64,7 +66,8 @@ SPEC CHECKSUMS:
   NXOAuth2Client: 478bc4f9a04e7ba9908b6c40f8669321676af0ee
   OHAttributedLabel: 73cc99cbe32f94d51463853c7ac35a3fba185937
   ReactiveCocoa: b686fa735c28c2dc7311fbd2f0895b4d4ae07360
+  Reveal-iOS-SDK: 5d9715f81487585744d70eba7d81b345b8093e28
   TestFlightSDK: dea28c16f0bf65c49c4ed8939b2ae0b0ed9bf8b0
   UIColor-Utilities: a392783be1b72e5d5ad9ae450ef2280239441bc8
 
-COCOAPODS: 0.26.2
+COCOAPODS: 0.25.0

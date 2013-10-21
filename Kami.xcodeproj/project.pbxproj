@@ -39,20 +39,6 @@
 			remoteGlobalIDString = 7165DCF21802E13E00AA0220;
 			remoteInfo = Kami;
 		};
-		71C26B2B181097DC00FED259 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 71C26B26181097DC00FED259 /* SoundCloudUI.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F6EF8C6113F929D700B20B40;
-			remoteInfo = libSoundCloudUI;
-		};
-		71C26B2D181097DC00FED259 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 71C26B26181097DC00FED259 /* SoundCloudUI.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F62E0CE5148FB27100BE8F14;
-			remoteInfo = SoundCloudUI.framework;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -89,7 +75,6 @@
 		718ECB27180C070C00A39B8B /* KAListToDetailTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KAListToDetailTransition.m; sourceTree = "<group>"; };
 		71C26B111810027C00FED259 /* UIImageView+KAUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+KAUtilities.h"; sourceTree = "<group>"; };
 		71C26B121810027C00FED259 /* UIImageView+KAUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+KAUtilities.m"; sourceTree = "<group>"; };
-		71C26B26181097DC00FED259 /* SoundCloudUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SoundCloudUI.xcodeproj; path = ../CocoaSoundCloudUI/SoundCloudUI.xcodeproj; sourceTree = "<group>"; };
 		BD11025F5AC0468AA640BC38 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -143,7 +128,6 @@
 		7165DCF51802E13E00AA0220 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				71C26B26181097DC00FED259 /* SoundCloudUI.xcodeproj */,
 				7165DD301802E5DB00AA0220 /* AddressBookUI.framework */,
 				7165DD2E1802E5D300AA0220 /* AddressBook.framework */,
 				7165DCF61802E13E00AA0220 /* Foundation.framework */,
@@ -217,15 +201,6 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
-		71C26B27181097DC00FED259 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				71C26B2C181097DC00FED259 /* libSoundCloudUI.a */,
-				71C26B2E181097DC00FED259 /* SoundCloudUI.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -295,12 +270,6 @@
 			mainGroup = 7165DCEA1802E13E00AA0220;
 			productRefGroup = 7165DCF41802E13E00AA0220 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 71C26B27181097DC00FED259 /* Products */;
-					ProjectRef = 71C26B26181097DC00FED259 /* SoundCloudUI.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				7165DCF21802E13E00AA0220 /* Kami */,
@@ -308,23 +277,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		71C26B2C181097DC00FED259 /* libSoundCloudUI.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libSoundCloudUI.a;
-			remoteRef = 71C26B2B181097DC00FED259 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		71C26B2E181097DC00FED259 /* SoundCloudUI.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SoundCloudUI.framework;
-			remoteRef = 71C26B2D181097DC00FED259 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		7165DCF11802E13E00AA0220 /* Resources */ = {
@@ -470,6 +422,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -503,6 +456,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Release;
 		};

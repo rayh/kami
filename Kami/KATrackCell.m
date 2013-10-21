@@ -10,8 +10,6 @@
 @property (nonatomic) UIImageView *authorImageView;
 @property (nonatomic) UILabel *timeLabel;
 @property (nonatomic) UILabel *titleLabel;
-@property (nonatomic) UIView *topBorderView;
-@property (nonatomic) UIToolbar *waveformBackgroundView;
 @end
 
 @implementation KATrackCell
@@ -41,25 +39,16 @@
         self.artworkImageView.contentMode = UIViewContentModeScaleAspectFill;
         [self.contentView addSubview:self.artworkImageView];
         
-        self.waveformBackgroundView = [[UIToolbar alloc] initWithFrame:CGRectZero];
-        self.waveformBackgroundView.barStyle = UIBarStyleBlack;
-        [self.contentView addSubview:self.waveformBackgroundView];
-        
         self.waveformImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         self.waveformImageView.alpha = 1.0;
         self.waveformImageView.contentMode = UIViewContentModeScaleToFill;
-        self.waveformImageView.tintColor = [UIColor colorWithWhite:1. alpha:0.1];
+        self.waveformImageView.tintColor = [[UIColor colorWithRGBHex:0xf0570c] colorWithAlphaComponent:0.];
 //        self.waveformImageView.backgroundColor = [UIColor colorWithWhite:0.2 alpha:1.];
         [self.contentView addSubview:self.waveformImageView];
-        
-        self.topBorderView = [[UIView alloc] initWithFrame:CGRectZero];
-        self.topBorderView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
-        [self.contentView addSubview:self.topBorderView];
         
         self.authorImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         self.authorImageView.layer.borderColor = [UIColor colorWithWhite:1 alpha:0.5].CGColor;
         self.authorImageView.layer.borderWidth = 1.;
-        self.authorImageView.layer.cornerRadius = 17.;
         self.authorImageView.layer.masksToBounds = YES;
         [self.contentView addSubview:self.authorImageView];
 
@@ -72,40 +61,52 @@
         
         self.timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.timeLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:10];
-        self.timeLabel.textColor = [UIColor colorWithWhite:1 alpha:0.7];
+        self.timeLabel.textColor = [UIColor colorWithWhite:1 alpha:0.5];
         self.timeLabel.textAlignment = NSTextAlignmentLeft;
         [self.contentView addSubview:self.timeLabel];
+        
+        UIInterpolatingMotionEffect *horizontalShift = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+        horizontalShift.maximumRelativeValue=@(-10);
+        horizontalShift.minimumRelativeValue=@(10);
+        
+        UIInterpolatingMotionEffect *verticalShift = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+        verticalShift.maximumRelativeValue=@(-10);
+        verticalShift.minimumRelativeValue=@(10);
+        
+        UIMotionEffectGroup *group = [[UIMotionEffectGroup alloc] init];
+        group.motionEffects = @[horizontalShift, verticalShift];
+
+        [self.titleLabel addMotionEffect:group];
+        [self.timeLabel addMotionEffect:group];
+        [self.authorImageView addMotionEffect:group];
+        [self.artworkImageView addMotionEffect:group];
+        
     }
     return self;
 }
 
 - (void)layoutSubviews
 {
-    CGFloat overlayHeight = ceilf(self.bounds.size.height/3.);
-    
-    self.topBorderView.frame = CGRectMake(0, 0, self.bounds.size.width, 1);
-
-    self.artworkImageView.frame = self.bounds;
-//    self.artworkImageView.layer.cornerRadius = self.artworkImageView.frame.size.height/2;
+    self.artworkImageView.frame = CGRectMake(20, 100, self.bounds.size.width-40, self.bounds.size.width-40);
     self.artworkImageView.layer.masksToBounds = YES;
     
-    self.waveformImageView.frame = CGRectMake(0, self.bounds.size.height - overlayHeight, self.bounds.size.width, overlayHeight);
-    self.waveformBackgroundView.frame = self.waveformImageView.frame;
+    self.waveformImageView.frame = CGRectMake(0, 32., self.bounds.size.width, 44.);
+
+    self.authorImageView.frame = CGRectMake(20.,CGRectGetMaxY(self.artworkImageView.frame) + 10., 32., 32.);
+    self.authorImageView.layer.cornerRadius = 16.;
     
-    self.authorImageView.frame = CGRectMake(5.,self.bounds.size.height - overlayHeight + 5., 34., 34.);
-    
-    self.timeLabel.frame = CGRectMake(44.,
-                                      self.bounds.size.height - overlayHeight + 5.,
-                                      self.bounds.size.width - 10.,
+    self.timeLabel.frame = CGRectMake(62.,
+                                      CGRectGetMaxY(self.artworkImageView.frame) + 10.,
+                                      self.bounds.size.width - 62. - 20.,
                                       12);
     
-    CGRect boundingRect = [self.titleLabel.text boundingRectWithSize:CGSizeMake(self.bounds.size.width-5.-44., CGFLOAT_MAX)
+    CGRect boundingRect = [self.titleLabel.text boundingRectWithSize:CGSizeMake(self.bounds.size.width-5.-62.-20., CGFLOAT_MAX)
                                                              options:NSStringDrawingUsesLineFragmentOrigin
                                                           attributes:@{NSFontAttributeName:self.titleLabel.font}
                                                              context:nil];
-    self.titleLabel.frame = CGRectMake(44.,
+    self.titleLabel.frame = CGRectMake(62.,
                                        CGRectGetMaxY(self.timeLabel.frame),
-                                       self.bounds.size.width-5.-44.,
+                                       self.bounds.size.width-5.-62.-20.,
                                        ceilf(boundingRect.size.height));
 }
 
